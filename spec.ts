@@ -149,7 +149,7 @@ describe('Test', function () {
     let searchText = function(text) {
         elemCheck(searchField)
         searchField.sendKeys(text)
-        browser.sleep(500)
+       // browser.sleep(500)
         goButton.click()
     }
 
@@ -170,7 +170,8 @@ describe('Test', function () {
     it('1 test - general positive', function () {
         mainPageLoad()
         searchText(test_1)
-        expect(searchResultTitle.count()).not.toBe('0')
+        browser.sleep(2000)
+        expect(searchResult.count()).toBeGreaterThan(0)
            
         searchResultTitle.each(function (elem, indx) {
         expect(elem.getText()).toContain('Godfather')
@@ -180,30 +181,30 @@ describe('Test', function () {
     it('2 test - capital positive', function () {
         mainPageLoad()
         searchText(test_2)
-   
-        expect(searchResultTitle.count()).not.toEqual('0')
+        browser.sleep(2000)
+        expect(searchResult.count()).toBeGreaterThan(0)
 
         searchResultTitle.each(function (elem, indx) {
-        expect(elem.getText()).toContain(test_2)
+        expect(elem.getText()).toContain('Godfather')
         })
     })
 
     it('3 test - mix capital positive', function () {
         mainPageLoad()
         searchText(test_3)
-   
-        expect(searchResult.count()).not.toBe('0')
+        browser.sleep(2000)
+        expect(searchResult.count()).toBeGreaterThan(0)
 
         searchResult.each(function (elem, indx) {
-        expect(elem.getText()).toContain(test_3)
+        expect(elem.getText()).toContain('Godfather')
         })
     })
     
     it('4 test - numbers', function () {
         mainPageLoad()
         searchText(test_4)
-   
-        expect(searchResult.count()).not.toBe('0')
+        browser.sleep(2000)
+        expect(searchResult.count()).toBeGreaterThan(0)
 
         searchResult.each(function (elem, indx) {
         expect(elem.getText()).toContain(test_4)
@@ -213,8 +214,8 @@ describe('Test', function () {
     it('5 test - symbols', function () {
         mainPageLoad()
         searchText(test_5)
-   
-        expect(searchResult.count()).not.toBe('0')
+        browser.sleep(2000)
+        expect(searchResult.count()).toEqual(0)
 
         searchResult.each(function (elem, indx) {
         expect(elem.getText()).toContain(test_5)
@@ -224,8 +225,8 @@ describe('Test', function () {
     it('6 test - one space', function () {
         mainPageLoad()
         searchText(test_6)
-   
-        expect(searchResult.count()).not.toBe('0')
+        browser.sleep(2000)
+        expect(searchResult.count()).toEqual(0)
 
         searchResult.each(function (elem, indx) {
         expect(elem.getText()).toContain(test_6)
@@ -235,8 +236,8 @@ describe('Test', function () {
     it('7 test - empty field', function () {
         mainPageLoad()
         searchText(test_7)
-   
-        expect(searchResult.count()).not.toBe('0')
+        browser.sleep(2000)
+        expect(searchResult.count()).toEqual(0)
 
         searchResult.each(function (elem, indx) {
         expect(elem.getText()).toContain(test_7)
@@ -246,8 +247,8 @@ describe('Test', function () {
     it('8 test - different languages ', function () {
         mainPageLoad()
         searchText(test_8)
-   
-        expect(searchResult.count()).not.toBe('0')
+        browser.sleep(2000)
+        expect(searchResult.count()).toBeGreaterThan(0)
 
         searchResult.each(function (elem, indx) {
         expect(elem.getText()).toContain(test_8)
@@ -257,8 +258,8 @@ describe('Test', function () {
     it('9 test - long string - max number of letters 2000', function () {
         mainPageLoad()
         searchText(test_9)
-   
-        expect(searchResult.count()).not.toBe('0')
+        browser.sleep(2000)
+        expect(searchResult.count()).toEqual(0)
 
         searchResult.each(function (elem, indx) {
         expect(elem.getText()).toContain(test_9)
@@ -268,8 +269,8 @@ describe('Test', function () {
     it('10 test - short string - min number of letters', function () {
         mainPageLoad()
         searchText(test_10)
-   
-        expect(searchResult.count()).not.toBe('0')
+        browser.sleep(2000)
+        expect(searchResult.count()).toBeGreaterThan(0)
 
         searchResult.each(function (elem, indx) {
         expect(elem.getText()).toContain(test_10)
@@ -280,7 +281,7 @@ describe('Test', function () {
         browser.get(URL)
         searchField.sendKeys(test_11)
         searchField.submit()
-
+        browser.sleep(2000)
         searchResultTitle.each(function (elem, indx) {
         expect(elem.getText()).toContain('Godfather')
         })
