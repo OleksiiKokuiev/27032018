@@ -4,8 +4,9 @@ import { BasePage } from './basePage'
 export class SearchPage extends BasePage {
     public searchField = element(By.name('searchStr'))
     public goButton = element(By.buttonText('Go!'))
-    public searchResult = $('movies>.jumbotron+div movie-card')
+    public searchResult = $$('movies>.jumbotron+div movie-card')
     public searchResultTitle = $$('movies>.jumbotron+div movie-card  [title]')
+    public pageTitleResult = $('.orange-text')
     public movieCards = $$('movie-card')
     public URL = ''
 

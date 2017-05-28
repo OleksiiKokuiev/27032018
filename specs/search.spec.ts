@@ -1,10 +1,10 @@
-import { browser, element, By, $ } from 'protractor'
+import { browser, element, By, $, protractor } from 'protractor'
 import { SearchPage } from '../pageObjects/searchPage'
 
 describe('Search test', function () {
     let searchPage = new SearchPage();
 
-    beforeEach(()=> {
+    beforeEach(() => {
         searchPage.open();
     })
 
@@ -107,7 +107,7 @@ describe('Search test', function () {
     it('10 test - short string - min number of letters', function () {
         searchPage.searchText(test_10)
         browser.sleep(2000)
-        expect(searchPage.searchResult.count()).toBeGreaterThan(0, 'Amount of search result should be greater than 0')
+        expect((searchPage.searchResult).count()).toBeGreaterThan(0, 'Amount of search result should be greater than 0')
 
     })
 
