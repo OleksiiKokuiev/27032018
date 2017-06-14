@@ -9,6 +9,12 @@ export class SearchPage extends BasePage {
     public pageTitleResult = $('.orange-text')
     public movieCards = $$('movie-card')
     public URL = ''
+    public upcomingMovies = element(By.partialLinkText('Upcoming Movies'))
+    public URL_upcoming = 'https://movies-finder.firebaseapp.com/upcoming'
+    public popularSeriesLink = $('a[href*="popular"]')
+    public popularSeriesURL = 'https://movies-finder.firebaseapp.com/popular/series'
+    public mainPageLink = $('.navbar-brand')
+
 
     elemCheck = function (elemForCheck) {
         expect(elemForCheck.isDisplayed()).toBeTruthy()

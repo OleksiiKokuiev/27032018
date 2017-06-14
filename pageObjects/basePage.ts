@@ -1,13 +1,9 @@
-import { browser, element, By, $, $$ } from 'protractor'
+import { browser, element, By, $, $$, protractor } from 'protractor'
+import { BaseFragment, BaseArrayFragment } from 'protractor-element-extend'
 
 export class BasePage {
     public URL
-    public movieCard = {
-         title: $('.caption a[ng-reflect-title]'),
-         releaseDate: $('.caption p:nth-child(2)'),
-         detailsLink: $('.caption p a'),
-         rating: $('.caption small')
-     }
+
 
     open() {
         browser.get(this.URL)
@@ -17,3 +13,9 @@ export class BasePage {
         expect(elemForCheck.isDisplayed()).toBeTruthy()
     }
 }
+
+
+
+
+
+

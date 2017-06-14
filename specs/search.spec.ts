@@ -3,6 +3,7 @@ import { SearchPage } from '../pageObjects/searchPage'
 
 describe('Search test', function () {
     let searchPage = new SearchPage();
+    let EC = protractor.ExpectedConditions;
 
     beforeEach(() => {
         searchPage.open();
@@ -28,7 +29,9 @@ describe('Search test', function () {
 
     it('1 test - general positive', function () {
         searchPage.searchText(test_1.query)
-        browser.sleep(2000)
+        //browser.wait(EC.visibilityOf(searchPage.movieCards.last()), 5000);
+        browser.wait(EC.visibilityOf(searchPage.searchResult.last()), 5000);
+        //browser.sleep(2000)
         expect(searchPage.searchResult.count()).toBeGreaterThan(0, 'Amount of search result should be greater than 0')
 
         searchPage.searchResultTitle.each(function (elem, indx) {
@@ -38,7 +41,7 @@ describe('Search test', function () {
 
     it('2 test - capital positive', function () {
         searchPage.searchText(test_2.query)
-        browser.sleep(2000)
+        browser.wait(EC.visibilityOf(searchPage.searchResult.last()), 5000);
         expect(searchPage.searchResult.count()).toBeGreaterThan(0, 'Amount of search result should be greater than 0')
 
         searchPage.searchResultTitle.each(function (elem, indx) {
@@ -48,7 +51,7 @@ describe('Search test', function () {
 
     it('3 test - mix capital positive', function () {
         searchPage.searchText(test_3.query)
-        browser.sleep(2000)
+        browser.wait(EC.visibilityOf(searchPage.searchResult.last()), 5000);
         expect(searchPage.searchResult.count()).toBeGreaterThan(0, 'Amount of search result should be greater than 0')
 
         searchPage.searchResultTitle.each(function (elem, indx) {
@@ -58,7 +61,7 @@ describe('Search test', function () {
 
     it('4 test - numbers', function () {
         searchPage.searchText(test_4)
-        browser.sleep(2000)
+        browser.wait(EC.visibilityOf(searchPage.searchResult.last()), 5000);
         expect(searchPage.searchResult.count()).toBeGreaterThan(0, 'Amount of search result should be greater than 0')
 
         searchPage.searchResultTitle.each(function (elem, indx) {
@@ -68,29 +71,29 @@ describe('Search test', function () {
 
     it('5 test - symbols', function () {
         searchPage.searchText(test_5)
-        browser.sleep(2000)
+        browser.wait(EC.visibilityOf(searchPage.movieCards.last()), 5000);
         expect(searchPage.searchResult.count()).toEqual(0, 'Amount of search result should be 0')
     })
 
     it('6 test - one space', function () {
         searchPage.searchText(test_6)
-        browser.sleep(2000)
+        browser.wait(EC.visibilityOf(searchPage.movieCards.last()), 5000);
         expect(searchPage.searchResult.count()).toEqual(0, 'Amount of search result should be 0')
     })
 
     it('7 test - empty field', function () {
         searchPage.elemCheck(searchPage.searchField)
         searchPage.searchField.sendKeys(test_7)
-        browser.sleep(1500)
+        browser.wait(EC.visibilityOf(searchPage.movieCards.last()), 5000);
         expect(searchPage.searchField.getAttribute('ng-reflect-model')).toBe(null, 'Check a text in the search field')
         searchPage.goButton.click()
-        browser.sleep(2000)
+        browser.wait(EC.visibilityOf(searchPage.movieCards.last()), 5000);
         expect(searchPage.searchResult.count()).toEqual(0, 'Amount of search result should be 0')
     })
 
     it('8 test - different languages ', function () {
         searchPage.searchText(test_8.query)
-        browser.sleep(2000)
+        browser.wait(EC.visibilityOf(searchPage.searchResult.last()), 5000);
         expect(searchPage.searchResult.count()).toBeGreaterThan(0, 'Amount of search result should be greater than 0')
 
         searchPage.searchResultTitle.each(function (elem, indx) {
@@ -100,13 +103,13 @@ describe('Search test', function () {
 
     it('9 test - long string - max number of letters 2000', function () {
         searchPage.searchText(test_9)
-        browser.sleep(2000)
+        browser.wait(EC.visibilityOf(searchPage.movieCards.last()), 5000);
         expect(searchPage.searchResult.count()).toEqual(0, 'Amount of search result should be 0')
     })
 
     it('10 test - short string - min number of letters', function () {
         searchPage.searchText(test_10)
-        browser.sleep(2000)
+        browser.wait(EC.visibilityOf(searchPage.searchResult.last()), 5000);
         expect((searchPage.searchResult).count()).toBeGreaterThan(0, 'Amount of search result should be greater than 0')
 
     })
@@ -114,7 +117,7 @@ describe('Search test', function () {
     it('11 test - submit/click', function () {
         searchPage.searchField.sendKeys(test_11.query)
         searchPage.searchField.submit()
-        browser.sleep(2000)
+        browser.wait(EC.visibilityOf(searchPage.movieCards.last()), 5000);
         searchPage.searchResultTitle.each(function (elem, indx) {
             expect(elem.getText()).toContain(test_11.result)
         })

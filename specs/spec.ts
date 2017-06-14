@@ -1,126 +1,58 @@
-import {browser, element, By} from 'protractor'
+import { browser, element, By, $, $$, protractor } from 'protractor'
+import { SearchPage } from '../pageObjects/searchPage'
 
-xdescribe('Test 1', function () {
-    it('1 test', function () {
-        const URL = 'https://movies-finder.firebaseapp.com/'
+describe('Basic tests', function () {
+    let searchPage = new SearchPage();
+    let URL = 'https://movies-finder.firebaseapp.com/'
+    let EC = protractor.ExpectedConditions;
 
-        browser.get(URL)
-        browser.sleep(10000)
+
+    beforeEach(() => {
+        searchPage.open();
+    })
+    afterEach(() => {
+        browser.manage().deleteAllCookies()
+    })
+
+
+    it('Main page Title', function () {
         expect(browser.getCurrentUrl()).toEqual(URL);
         expect(browser.getTitle()).toEqual('Movies Finder')
     })
 
-    it('2 test', function () {
-        let locator = By.css('input.form-control')
-        let searchField = element(locator)
-
-        const URL = 'https://movies-finder.firebaseapp.com/'
-
-        browser.get(URL)
-        browser.sleep(10000)
-
-        expect(searchField.isPresent()).toBeTruthy()
-        expect(searchField.isDisplayed()).toBeTruthy()
+    it('Search field is available', function () {
+        expect(searchPage.searchField.isDisplayed()).toBeTruthy()
     })
 
-    it('3 test', function () {
-        let locator = By.css('input.form-control')
-        let searchField = element(locator)
-
-        const URL = 'https://movies-finder.firebaseapp.com/'
-
-        browser.get(URL)
-        browser.sleep(10000) 
-
-        expect(searchField.getAttribute('placeholder')).toEqual('Search for movies...')
+    it('Search field default text', function () {
+        expect(searchPage.searchField.getAttribute('placeholder')).toEqual('Search for movies...')
     })
 
-    it('4 test', function () {
-        let locator = By.css('input.form-control')
-        let searchField = element(locator)
-
-        const URL = 'https://movies-finder.firebaseapp.com/'
-
-        browser.get(URL)
-        browser.sleep(3000) 
-
-        searchField.sendKeys('HELLO WORLD')
-        browser.sleep(10000)
-        element(By.css('span.input-group-btn button.btn.btn-primary')).click()
-        browser.sleep(10000)
+    it('Upcoming movies', function () {
+        expect(searchPage.upcomingMovies.isDisplayed()).toBeTruthy()
+        element(searchPage.upcomingMovies.click())
+        browser.wait(EC.visibilityOf(searchPage.upcomingMovies), 5000);
+        expect(browser.getCurrentUrl()).toEqual(searchPage.URL_upcoming)
     })
 
-    it('5 test - upcoming', function () {
-        let locator = By.partialLinkText('Upcoming Movies')
-        let upcomingLink = element(locator)
+    it('Popular series', function () {
 
-        const URL = 'https://movies-finder.firebaseapp.com/'
-        const URL_upcoming = 'https://movies-finder.firebaseapp.com/upcoming'
-
-        browser.get(URL)
-        browser.sleep(3000) 
-
-        expect(upcomingLink.isPresent()).toBeTruthy()
-        expect(upcomingLink.isDisplayed()).toBeTruthy()
-        browser.sleep(10000)
-        element(upcomingLink.click())
-        browser.sleep(10000)
-        expect(browser.getCurrentUrl()).toEqual(URL_upcoming)
+        expect(searchPage.popularSeriesLink.isDisplayed()).toBeTruthy()
+        element(searchPage.popularSeriesLink.click())
+        browser.wait(EC.visibilityOf(searchPage.popularSeriesLink), 5000);
+        expect(browser.getCurrentUrl()).toEqual(searchPage.popularSeriesURL)
     })
 
-    it('6 test - popular series', function () {
-        let locator = By.css('a[href*="popular"]')
-        let popularSeriesLink = element(locator)
+    it('Main page - Popular series - Main page', function () {
+        expect(searchPage.popularSeriesLink.isDisplayed()).toBeTruthy()
+        element(searchPage.popularSeriesLink.click())
+        browser.wait(EC.visibilityOf(searchPage.popularSeriesLink), 5000);
+        expect(browser.getCurrentUrl()).toEqual(searchPage.popularSeriesURL)
+        browser.wait(EC.visibilityOf(searchPage.mainPageLink), 5000);
 
-        const URL = 'https://movies-finder.firebaseapp.com/'
-        const popularSeriesURL = 'https://movies-finder.firebaseapp.com/popular/series'
-
-        browser.get(URL)
-        browser.sleep(3000) 
-
-        expect(popularSeriesLink.isPresent()).toBeTruthy()
-        expect(popularSeriesLink.isDisplayed()).toBeTruthy()
-        browser.sleep(10000)
-        element(popularSeriesLink.click())
-        browser.sleep(10000)
-        expect(browser.getCurrentUrl()).toEqual(popularSeriesURL)
+        element(searchPage.mainPageLink.click())
+        browser.wait(EC.visibilityOf(searchPage.movieCards.last()), 5000);
+        expect(browser.getCurrentUrl()).toEqual(URL)
     })
 
-    it('7 test - main page', function () {
-        let locator_main = By.css('.navbar-brand')
-        let locator_pop = By.css('a[href*="popular"]')
-        let popularSeriesLink = element(locator_pop)
-        let mainPageLink = element(locator_main)
-
-        const URL = 'https://movies-finder.firebaseapp.com/'
-        const popularSeriesURL = 'https://movies-finder.firebaseapp.com/popular/series'
-
-        browser.get(URL)
-        browser.sleep(3000) 
-
-        expect(popularSeriesLink.isPresent()).toBeTruthy()
-        expect(popularSeriesLink.isDisplayed()).toBeTruthy()
-        browser.sleep(10000)
-        element(popularSeriesLink.click())
-        browser.sleep(10000)
-        expect(browser.getCurrentUrl()).toEqual(popularSeriesURL)
-
-        expect(mainPageLink.isPresent()).toBeTruthy()
-        expect(mainPageLink.isDisplayed()).toBeTruthy()
-        browser.sleep(10000)
-        element(mainPageLink.click())
-        browser.sleep(10000)
-        expect(browser.getCurrentUrl()).toEqual(URL)       
-    })
-
-    it('8 test - genre count', function () {
-        const URL = 'https://movies-finder.firebaseapp.com/'
-        const genresNumb = 19
-
-        browser.get(URL)
-        browser.sleep(3000) 
-
-        expect(element.all(By.css('.list-group-item')).count()).toEqual(genresNumb)
-  
-    })
 })

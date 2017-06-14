@@ -34,6 +34,8 @@ describe('Category test', function () {
     })
     it("Selection of categories", function () {
         categoryPage.selectCategory('Action');
+        expect((categoryPage.activeCategory).getText()).toBe((categoryPage.categoryName).getText());
         categoryPage.selectCategory('Drama');
+        expect((categoryPage.activeCategory).getText()).toBe((categoryPage.categoryName).getText());
     })
 })
