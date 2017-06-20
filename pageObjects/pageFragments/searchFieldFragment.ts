@@ -3,16 +3,20 @@ import { BaseFragment, BaseArrayFragment } from 'protractor-element-extend'
 
 
 export class SearchFieldFragment extends BaseFragment {
-    constructor(searchFieldElement) {
-        super(searchFieldElement)
+    public EC = protractor.ExpectedConditions;
+    
+    constructor(element) {
+        super(element)
 
-        this.search = searchFieldElement;
+        this.search = element;
         this.searchField = this.search.element(By.name('searchStr'))
         this.goButton = this.search.element(By.buttonText('Go!'))
     }
 
-    enterText() {
-
+    enterText(text) {
+        browser.wait(this.EC.visibilityOf(this.searchField), 5000);
+        this.searchField.sendKeys(text)
+        
     }
     getTextForSearch() {
 

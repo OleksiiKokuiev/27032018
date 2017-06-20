@@ -10,19 +10,19 @@ describe('Movie details test -', function () {
 
     beforeEach(() => {
         movieDetailsPage.open();
-
+        browser.driver.manage().window().maximize()
     })
 
     afterEach(() => {
         browser.manage().deleteAllCookies()
     })
-
-    xit('Play trailer', function () {
+    it('Play trailer ', function () {
         browser.wait(EC.visibilityOf(movieDetailsPage.trailerFrame), 5000);
-        browser.switchTo().frame(movieDetailsPage.trailerFrame)
-        movieDetailsPage.playButton.click();
+        browser.actions().sendKeys(protractor.Key.SPACE).perform()
+        browser.actions().mouseMove(movieDetailsPage.trailerFrame).click().perform();
         browser.sleep(5000);
-        browser.switchTo().defaultContent();
+        
+        
 
     })
     it('Movie name', function () {
