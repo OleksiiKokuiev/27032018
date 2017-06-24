@@ -1,4 +1,4 @@
-import { browser, element, By, $, protractor } from 'protractor'
+import { browser, element, By, $, $$, protractor } from 'protractor'
 import { MovieDetailsPage } from '../pageObjects/movieDetailsPage'
 import { CategoryPage } from '../pageObjects/categoryPage'
 
@@ -11,18 +11,23 @@ describe('Movie details test -', function () {
     beforeEach(() => {
         movieDetailsPage.open();
         browser.driver.manage().window().maximize()
+        
     })
 
     afterEach(() => {
         browser.manage().deleteAllCookies()
     })
-    it('Play trailer ', function () {
+    fit('Play trailer ', function () {
         browser.wait(EC.visibilityOf(movieDetailsPage.trailerFrame), 5000);
         browser.actions().sendKeys(protractor.Key.SPACE).perform()
         browser.actions().mouseMove(movieDetailsPage.trailerFrame).click().perform();
         browser.sleep(5000);
-        
-        
+        //movieDetailsPage.switchToFrame(); .embed-responsive-item
+        //browser.switchTo().frame(element($$('iframe').first()).getWebElement())
+        browser.switchTo().frame(element($('.embed-responsive-item')).getWebElement())
+        expect(movieDetailsPage.videoPlayerPlay.isDisplayed()).toBe(true)
+        //expect(movieDetailsPage.videoPlayerPlay.getAttribute('class')).toEqual('playing-mode')
+        movieDetailsPage.switchToDefault();  
 
     })
     it('Movie name', function () {
@@ -92,7 +97,8 @@ describe('Movie details test -', function () {
             expect(movieDetailsPage.reviewAutor.getText()).not.toBe('')
         })
     })
-    xit('Movie review page', function () {
+    fit('Movie review page', function () {
+        browser.waitForAngularEnabled(false)
         /*browser.wait(EC.visibilityOf(movieDetailsPage.reviewAutor.first()), 5000);
         movieDetailsPage.openFirstReview();
         browser.sleep(5000)

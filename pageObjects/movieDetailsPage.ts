@@ -18,6 +18,8 @@ export class MovieDetailsPage extends BasePage {
     public overviewText = $$('.col-md-8 p').last()
     public moviesWebSiteButton = $('.btn-info')
     public trailerFrame = $('.embed-responsive-item')
+    public videoPlayerPlay = $('.playing-mode')
+    public videoPlayerPause = $('.html5-video-player')
     public playButton = $('.ytp-large-play-button')
     public similarMovies = $$('movie-card')
     //public similarMoviesName = $$('')
@@ -64,7 +66,7 @@ export class MovieDetailsPage extends BasePage {
     }
     switchToFrame() {
         browser.wait(this.EC.visibilityOf(this.trailerFrame), 5000);
-        browser.switchTo().frame(element(By.tagName('iframe')).getWebElement());
+        browser.switchTo().frame(element($$('iframe').first()).getWebElement());
     }
     switchToDefault() {
         browser.wait(this.EC.visibilityOf(this.trailerFrame), 5000);
