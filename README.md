@@ -1,8 +1,8 @@
 # movie_finder
-Working project for StartIT students
+Test project for protractor practice
 
 
-To make sure everything works in this initial repo:
+To expand this project just do following steps:
 - clone
 - do `npm install` in root of this repo
 - do `npm test`
