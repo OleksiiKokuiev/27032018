@@ -17,7 +17,7 @@ describe('Movie details test -', function () {
     afterEach(() => {
         browser.manage().deleteAllCookies()
     })
-    fit('Play trailer ', function () {
+    xit('Play trailer ', function () {
         browser.wait(EC.visibilityOf(movieDetailsPage.trailerFrame), 5000);
         browser.actions().sendKeys(protractor.Key.SPACE).perform()
         browser.actions().mouseMove(movieDetailsPage.trailerFrame).click().perform();
@@ -73,6 +73,7 @@ describe('Movie details test -', function () {
         browser.wait(EC.visibilityOf(movieDetailsPage.similarMovies.first()), 5000);
         expect(movieDetailsPage.getSimilarMovies()).toBeGreaterThan(0)
     })
+
     xit('Similar movies page - name', function () {
         browser.wait(EC.visibilityOf(movieDetailsPage.trailerFrame), 5000);
 
@@ -97,7 +98,7 @@ describe('Movie details test -', function () {
             expect(movieDetailsPage.reviewAutor.getText()).not.toBe('')
         })
     })
-    fit('Movie review page', function () {
+    xit('Movie review page', function () {
         browser.waitForAngularEnabled(false)
         /*browser.wait(EC.visibilityOf(movieDetailsPage.reviewAutor.first()), 5000);
         movieDetailsPage.openFirstReview();

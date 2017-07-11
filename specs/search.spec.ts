@@ -1,7 +1,7 @@
 import { browser, element, By, $, protractor } from 'protractor'
 import { SearchPage } from '../pageObjects/searchPage'
 
-describe('Search test', function () {
+xdescribe('Search test', function () {
     let searchPage = new SearchPage();
     let EC = protractor.ExpectedConditions;
 
@@ -30,7 +30,7 @@ describe('Search test', function () {
     it('1 test - general positive', function () {
         searchPage.searchText(test_1.query)
         //browser.wait(EC.visibilityOf(searchPage.movieCards.last()), 5000);
-        browser.wait(EC.visibilityOf(searchPage.searchResult.last()), 5000);
+        browser.wait(EC.visibilityOf(searchPage.searchResult.last()), 10000);
         //browser.sleep(2000)
         expect(searchPage.searchResult.count()).toBeGreaterThan(0, 'Amount of search result should be greater than 0')
 

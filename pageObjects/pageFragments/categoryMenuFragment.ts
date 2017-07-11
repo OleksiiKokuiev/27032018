@@ -15,7 +15,7 @@ export class CategoryMenuFragment extends BaseFragment {
     selectCategory(text: string) {
         let elem = element(By.linkText(text))
         elem.click()
-        var EC = protractor.ExpectedConditions;
+        let EC = protractor.ExpectedConditions;
         browser.wait(EC.visibilityOf(this.activeCategory), 5000);
         browser.wait(EC.visibilityOf(this.categoryName), 5000);
     }
