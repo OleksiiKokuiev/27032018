@@ -18,6 +18,7 @@ module.exports.config = {
             savePath: '../test_results/',
             consolidateAll: true
         }
+        //adding reporter
         jasmine.getEnv().addReporter(new JUnitXmlReporter(junit_reporter_options))
     }
 }
