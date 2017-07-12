@@ -92,7 +92,7 @@ describe('Movie details test -', function () {
             expect(movieDetailsPage.reviewTitle.getText()).not.toBe('')
         })
     })
-    it('Movie review - Autor', function () {
+    it('Movie review - Author', function () {
         browser.wait(EC.visibilityOf(movieDetailsPage.reviewAutor.first()), 5000);
         movieDetailsPage.reviewAutor.each(function (elem, index) {
             expect(movieDetailsPage.reviewAutor.getText()).not.toBe('')
