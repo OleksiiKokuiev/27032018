@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "webdriver-manager update",
     "pretest": "npm run tsc",
+    "jasmine-node": "npm install jasmine-node --save",
     "test": "jasmine-node specs/suite1.spec.js",
     "protractor": "protractor",
     "tsc": "tsc",
