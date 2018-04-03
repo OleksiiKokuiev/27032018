@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "webdriver-manager update",
     "pretest": "npm run tsc",
-    "test": "jasmine -v",
+    "test": "jasmine-node specs/suite1.spec.js",
     "protractor": "protractor",
     "tsc": "tsc",
     "tscw": "tsc -w"
